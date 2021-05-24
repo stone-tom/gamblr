@@ -82,7 +82,7 @@ navigator.serviceWorker.addEventListener("controllerchange", () => {
 
 const getGames = async () => {
   try {
-    const games = await fetch('https://gamblr-api.heroku.app/games');
+    const games = await fetch('https://gamblr-api.herokuapp.com/games');
     return games.json();
   } catch (e) {
     console.log(e);

@@ -14,3 +14,7 @@ table {
   border-collapse: collapse;
   text-align: center;
 }
+
+#new_game {
+  margin: 20px 0;
+}

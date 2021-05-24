@@ -29,9 +29,37 @@
   </section>
   <h2>All games:</h2>
   <section id="games"></section>
-  <section id="new_game"></section>
 
-
+  <button id="create_new_game">
+    Create new Game
+  </button>
+  <section id="new_game" style="display:none">
+    <div id="add_player_form">
+      <label>
+          New Player
+          <input id="new_player" name="new_player" type="text" />
+      </label>
+      <button id="add_player_button">
+        add
+      </button>
+    </div>
+    <h2>Aktuelles Spiel</h2>
+    <table id="current_game">
+      <thead>
+        <tr>
+          <th>Name:</th>
+          <th>Punkte:</th>
+          <th>+</th>
+          <th>-</th>
+        </tr>
+      </thead>
+      <tfoot id="players">
+      </tfoot>
+    </table>
+    <button id="submit_game">
+      Submit Game
+    </button>
+  </section>
   <script src="script.js" async defer></script>
 </body>
 

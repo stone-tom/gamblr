@@ -1,8 +1,8 @@
 const SW_VERSION = 7;
 const CACHE_NAME = `OFFLINE_VERSION_${SW_VERSION}`;
 
-// const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'http://localhost:1337/games'];
-const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'https://gamblr-api.herokuapp.com/games'];
+const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'http://localhost:1337/games', '/'];
+// const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'https://gamblr-api.herokuapp.com/games', '/'];
 
 self.addEventListener("install", (event) => {
   console.log("[ServiceWorker] install event");
@@ -61,7 +61,7 @@ self.addEventListener("fetch", (event) => {
         );
 
         const cache = await caches.open(CACHE_NAME);
-        const cachedResponse = await cache.matchAll(URL_TO_CACHE);
+        const cachedResponse = await cache.match(event.request);
         console.log(cachedResponse);
         return cachedResponse;
       }

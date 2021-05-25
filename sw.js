@@ -1,8 +1,8 @@
 const SW_VERSION = 1;
 const CACHE_NAME = `OFFLINE_VERSION_${SW_VERSION}`;
 
-const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'favicon.ico', 'http://localhost:1337/games', '/'];
-// const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'favicon.ico', 'https://gamblr-api.herokuapp.com/games', '/'];
+// const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'favicon.ico', 'http://localhost:1337/games', '/'];
+const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'favicon.ico', 'https://gamblr-api.herokuapp.com/games', '/'];
 
 self.addEventListener("install", (event) => {
   console.log("[ServiceWorker] install event");

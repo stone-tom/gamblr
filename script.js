@@ -88,8 +88,8 @@ navigator.serviceWorker.addEventListener("controllerchange", () => {
 
 const getGames = async () => {
   try {
-    const games = await fetch('http://localhost:1337/games');
-    // const games = await fetch('https://gamblr-api.herokuapp.com/games');
+    // const games = await fetch('http://localhost:1337/games');
+    const games = await fetch('https://gamblr-api.herokuapp.com/games');
     // console.log(games.json());
     return games.json();
   } catch (e) {
@@ -236,7 +236,8 @@ const submitGame = async () => {
     console.log(JSON.stringify({
       results,
     }));
-    const response = await fetch('http://localhost:1337/games', {
+    // const response = await fetch('http://localhost:1337/games', {
+    const response = await fetch('https://gamblr-api.herokuapp.com/games', {
       method: 'POST',
       body: JSON.stringify({
         results,

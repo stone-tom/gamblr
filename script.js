@@ -90,6 +90,7 @@ const getGames = async () => {
   try {
     // const games = await fetch('http://localhost:1337/games');
     const games = await fetch('https://gamblr-api.herokuapp.com/games');
+    // cache that one here
     return games.json();
   } catch (e) {
     console.log(e);
@@ -127,6 +128,8 @@ const renderGames = () => {
     gamesContainer.innerHTML += elements.join(' ');
   });
 };
+renderGames();
+
 
 createGame.addEventListener('click', () => {
   newGame.style.display = 'inline';
@@ -179,6 +182,6 @@ submitButton.addEventListener('click', () => {
   submitGame();
 });
 
-window.addEventListener('load', () => {
-  renderGames();
-});
+// window.addEventListener('load', () => {
+//   renderGames();
+// });

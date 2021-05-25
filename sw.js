@@ -1,6 +1,8 @@
 const SW_VERSION = 7;
 const CACHE_NAME = `OFFLINE_VERSION_${SW_VERSION}`;
-const URL_TO_CACHE = ['index.html'];
+
+// const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'http://localhost:1337/games'];
+const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', 'logo192.png', 'https://gamblr-api.herokuapp.com/games'];
 
 self.addEventListener("install", (event) => {
   console.log("[ServiceWorker] install event");
@@ -9,15 +11,15 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
-
+      console.log(cache);
       await cache.addAll(URL_TO_CACHE);
-      console.log("Offline page cached");
+      console.log("Offline page cached", cache);
     })()
   );
 });
 
 self.addEventListener("activate", (event) => {
-  console.log("[ServiceWorker] activate event");
+  // console.log("[ServiceWorker] activate event");
   //self.skipWaiting();
 
   event.waitUntil(
@@ -25,6 +27,7 @@ self.addEventListener("activate", (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
+            // console.log('gets deleted', cacheName);
             caches.delete(cacheName);
           } else {
             return null;
@@ -36,7 +39,7 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  console.log("[ServiceWorker] fetch event" + event.request.url);
+  // console.log("[ServiceWorker] fetch event " + event.request.url);
 
   // self.clients.matchAll().then((clients) => {
   //   clients.forEach((client) => {
@@ -50,7 +53,7 @@ self.addEventListener("fetch", (event) => {
     (async () => {
       try {
         const networkRequest = await fetch(event.request);
-        console.log('#############', event.request.url);
+        // console.log('#############', event.request);
         return networkRequest;
       } catch (error) {
         console.log(
@@ -59,6 +62,7 @@ self.addEventListener("fetch", (event) => {
 
         const cache = await caches.open(CACHE_NAME);
         const cachedResponse = await cache.matchAll(URL_TO_CACHE);
+        console.log(cachedResponse);
         return cachedResponse;
       }
     })()

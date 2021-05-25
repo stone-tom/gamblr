@@ -18,3 +18,7 @@ table {
 #new_game {
   margin: 20px 0;
 }
+
+#error_field {
+  color: red;
+}

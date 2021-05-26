@@ -294,7 +294,7 @@ addPlayer.addEventListener('click', () => {
         <button disabled id="${newPlayer.value}_remove">-</button>
       </td>
       <td id="${newPlayer.value}_delete_container">
-        <button disabled id="${newPlayer.value}_delete">delete</button>
+        <button id="${newPlayer.value}_delete">delete</button>
       </td>
     </tr>
   `);

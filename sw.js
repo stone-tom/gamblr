@@ -6,8 +6,6 @@ const URL_TO_CACHE = ['index.html', 'manifest.json', 'script.js', 'style.css', '
 
 self.addEventListener("install", (event) => {
   console.log("[ServiceWorker] install event");
-  //self.skipWaiting();
-
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
@@ -35,6 +33,7 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener('fetch', function (event) {
   if (!(event.request.url.indexOf('http') === 0)) return;
+  if ((event.request.method === 'POST')) return;
   event.respondWith(
     caches.open(CACHE_NAME).then(function (cache) {
       return cache.match(event.request).then(function (response) {
@@ -49,50 +48,33 @@ self.addEventListener('fetch', function (event) {
   );
 });
 
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push Received.');
+  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
 
-// self.addEventListener("fetch", (event) => {
-//   console.log("[ServiceWorker] fetch event " + event.request.url);
+  const title = 'Push Codelab';
+  const options = {
+    body: 'Yay it works.',
+    icon: 'images/icon.png',
+    badge: 'images/badge.png'
+  };
 
-//   // self.clients.matchAll().then((clients) => {
-//   //   clients.forEach((client) => {
-//   //     client.postMessage(
-//   //       `Hi ${client.id} you are loading the path ${event.request.url}`
-//   //     );
-//   //   });
-//   // });
+  event.waitUntil(self.registration.showNotification(title, options));
+});
 
-//   event.respondWith(
-//     (async () => {
-//       try {
-//         const networkRequest = await fetch(event.request);
-//         return networkRequest;
-//       } catch (error) {
-//         console.log(
-//           "[ServiceWorker] Fetch failed; returning offline page instead."
-//         );
+self.addEventListener('notificationclick', function(event) {
+  console.log('[Service Worker] Notification click Received.');
 
-//         const cache = await caches.open(CACHE_NAME);
-//         const cachedResponse = await cache.match(event.request);
-//         console.log(cachedResponse);
-//         return cachedResponse;
-//       }
-//     })()
-//   );
-//self.skipWaiting();
-// });
+  event.notification.close();
+
+  event.waitUntil(
+    clients.openWindow('https://fh-salzburg.ac.at')
+  );
+});
 
 self.addEventListener("message", function (event) {
   console.log("Service worker received message:", event.data);
   if (event.data === "skipWaiting") {
     self.skipWaiting();
   }
-  // if (event.data === "cacheCurrentGames") {
-  //   event.waitUntil(
-  //     (async () => {
-  //       const cache = await caches.open(CACHE_NAME);
-  //       await cache.addAll(URL_TO_CACHE);
-  //       console.log("Offline page cached again");
-  //     })()
-  //   );
-  // }
 });

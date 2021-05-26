@@ -13,6 +13,13 @@
 
 <body>
   <h1>Gamblr</h1>
+  <section>
+    <p>
+      Gamblr is a simple Web app, to store "Hosn Owi" game stats. The App works offline.
+      Old games get cached, so if you are offline, you can see them too.
+      When creating new games, they get saved in Local Storage, and can be sent to the Backend, when you are online again.
+    </p>
+  </section>
   <section class="install_section">
     <h2>Gamblr PWA Buttons</h2>
     <button id="butInstall" type="button">
@@ -26,6 +33,18 @@
     <button id="update" style="display:none">
       Update
     </button>
+
+    <button disabled id="push_button">
+      Enable Push Messaging
+    </button>
+
+  </section>
+  <section class="subscription-details js-subscription-details is-invisible">
+    <p>The Push notifications can only be testet locally, because the backend cant send Push Notifications yet.</p>
+    <p>If you want to test, you have to clone the repo and change the "applicationServerPublicKey" variable in the script.js file and send notifications with the following link "Push Companion"</p>
+
+      <a href="https://web-push-codelab.glitch.me/">Push Companion</a></p>
+    <pre><code id="sub_json"></code></pre>
   </section>
   <h2>All games:</h2>
   <section id="games"></section>
@@ -36,8 +55,8 @@
   <section id="new_game" style="display:none">
     <div id="add_player_form">
       <label>
-          New Player
-          <input id="new_player" name="new_player" type="text" />
+        New Player
+        <input id="new_player" name="new_player" type="text" />
       </label>
       <button id="add_player_button">
         add

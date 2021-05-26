@@ -1,8 +1,14 @@
+body {
+  padding: 20px;
+}
+
 #games {
   padding: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 table, td, th {
@@ -21,4 +27,8 @@ table {
 
 #error_field {
   color: red;
+}
+
+#sub_json {
+  width: 300px;
 }

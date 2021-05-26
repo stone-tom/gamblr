@@ -123,39 +123,39 @@ function subscribeUser() {
     userVisibleOnly: true,
     applicationServerKey: applicationServerKey
   })
-  .then(function(subscription) {
-    console.log('User is subscribed.');
+    .then(function (subscription) {
+      console.log('User is subscribed.');
 
-    updateSubscriptionOnServer(subscription);
+      updateSubscriptionOnServer(subscription);
 
-    isSubscribed = true;
+      isSubscribed = true;
 
-    updateButton();
-  })
-  .catch(function(err) {
-    console.log('Failed to subscribe the user: ', err);
-    updateButton();
-  });
+      updateButton();
+    })
+    .catch(function (err) {
+      console.log('Failed to subscribe the user: ', err);
+      updateButton();
+    });
 }
 
 function unsubscribeUser() {
   registration.pushManager.getSubscription()
-  .then(function(subscription) {
-    if (subscription) {
-      return subscription.unsubscribe();
-    }
-  })
-  .catch(function(error) {
-    console.log('Error unsubscribing', error);
-  })
-  .then(function() {
-    updateSubscriptionOnServer(null);
+    .then(function (subscription) {
+      if (subscription) {
+        return subscription.unsubscribe();
+      }
+    })
+    .catch(function (error) {
+      console.log('Error unsubscribing', error);
+    })
+    .then(function () {
+      updateSubscriptionOnServer(null);
 
-    console.log('User is unsubscribed.');
-    isSubscribed = false;
+      console.log('User is unsubscribed.');
+      isSubscribed = false;
 
-    updateButton();
-  });
+      updateButton();
+    });
 }
 
 function initializeUI() {
@@ -254,13 +254,14 @@ createGame.addEventListener('click', () => {
   addPlayerForm.style.display = 'inline';
 });
 
-
-deleteGameButton.addEventListener('click', () => {
+const deleteGame = () => {
   localStorage.removeItem('currentGame');
   newGame.style.display = 'none';
   createGame.style.display = 'inline';
   players.innerHTML = '';
-});
+};
+
+deleteGameButton.addEventListener('click', deleteGame);
 
 const getCurrentPlayerNames = () => {
   const allPlayers = document.getElementById('players');
@@ -287,13 +288,13 @@ addPlayer.addEventListener('click', () => {
       <td id="${newPlayer.value}_name">${newPlayer.value}</td>
       <td id="${newPlayer.value}_points">0</td>
       <td>
-        <button id="${newPlayer.value}_add">+</button>
+        <button disabled id="${newPlayer.value}_add">+</button>
       </td>
       <td>
-        <button id="${newPlayer.value}_remove">-</button>
+        <button disabled id="${newPlayer.value}_remove">-</button>
       </td>
       <td id="${newPlayer.value}_delete_container">
-        <button id="${newPlayer.value}_delete">delete</button>
+        <button disabled id="${newPlayer.value}_delete">delete</button>
       </td>
     </tr>
   `);
@@ -320,6 +321,8 @@ const startGame = () => {
 
     for (const name of getCurrentPlayerNames()) {
       removeHTML(`${name}_delete_container`);
+      document.getElementById(`${name}_add`).disabled = false;
+      document.getElementById(`${name}_remove`).disabled = false;
     }
   }
 };
@@ -386,6 +389,7 @@ const submitGame = async () => {
         ${players}
         </tfoot>
       </table>`);
+    deleteGame();
   } catch (e) {
     error.innerHTML = 'Du bist gerade nicht online, sende das Spiel wieder,wenn du online bist';
   }
@@ -413,9 +417,6 @@ window.addEventListener('load', () => {
           </td>
           <td>
             <button id="${name}_remove">-</button>
-          </td>
-          <td id="${newPlayer.value}_delete_container">
-            <button id="${newPlayer.value}_delete">delete</button>
           </td>
         </tr>
       `);

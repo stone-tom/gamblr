@@ -7,6 +7,9 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.game {
   margin-right: 10px;
   margin-bottom: 10px;
 }
@@ -31,4 +34,12 @@ table {
 
 #sub_json {
   width: 300px;
+}
+
+#game_buttons {
+  margin: 20px 0;
+}
+
+.game_button {
+  margin-right: 10px;
 }

@@ -17,7 +17,8 @@
     <p>
       Gamblr is a simple Web app, to store "Hosn Owi" game stats. The App works offline.
       Old games get cached, so if you are offline, you can see them too.
-      When creating new games, they get saved in Local Storage, and can be sent to the Backend, when you are online again.
+      When creating new games, they get saved in Local Storage, and can be sent to the Backend, when you are online
+      again.
     </p>
   </section>
   <section class="install_section">
@@ -41,9 +42,10 @@
   </section>
   <section class="subscription-details js-subscription-details is-invisible">
     <p>The Push notifications can only be testet locally, because the backend cant send Push Notifications yet.</p>
-    <p>If you want to test, you have to clone the repo and change the "applicationServerPublicKey" variable in the script.js file and send notifications with the following link "Push Companion"</p>
+    <p>If you want to test, you have to clone the repo and change the "applicationServerPublicKey" variable in the
+      script.js file and send notifications with the following link "Push Companion"</p>
 
-      <a href="https://web-push-codelab.glitch.me/">Push Companion</a></p>
+    <a href="https://web-push-codelab.glitch.me/">Push Companion</a></p>
     <pre><code id="sub_json"></code></pre>
   </section>
   <h2>All games:</h2>
@@ -75,15 +77,17 @@
       <tfoot id="players">
       </tfoot>
     </table>
-    <button disabled id="start_game">
-      Start Game
-    </button>
-    <button disabled id="submit_game">
-      Submit Game
-    </button>
-    <button id="delete_game">
-      Delete Game
-    </button>
+    <section id="game_buttons">
+      <button class="game_button" disabled id="start_game">
+        Start Game
+      </button>
+      <button class="game_button" disabled id="submit_game">
+        Submit Game
+      </button>
+      <button class="game_button" id="delete_game">
+        Delete Game
+      </button>
+    </section>
   </section>
   <p id="error_field"></p>
   <script src="script.js" async defer></script>

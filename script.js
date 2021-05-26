@@ -391,7 +391,10 @@ const submitGame = async () => {
       </table>`);
     deleteGame();
   } catch (e) {
-    error.innerHTML = 'Du bist gerade nicht online, sende das Spiel wieder,wenn du online bist';
+    error.innerHTML = 'You are currently offline! Submit the game when you are online again';
+    setTimeout(() => {
+      error.innerHTML = '';
+    }, 3000)
   }
 };
 
@@ -401,6 +404,9 @@ window.addEventListener('load', () => {
   renderGames();
   const runningGame = JSON.parse(localStorage.getItem('currentGame'));
   if (runningGame) {
+    if (Object.entries(runningGame).some(([name, points]) => points === 3)) {
+      submitButton.disabled = false;
+    }
     // show games and remove create button
     addPlayerForm.style.display = 'none';
     newGame.style.display = 'inline';

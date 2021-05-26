@@ -17,7 +17,7 @@ let defferredPrompt;
 let registration;
 const BACKEND_URL = 'https://gamblr-api.herokuapp.com/games';
 // const BACKEND_URL = 'http://localhost:1337/games';
-const applicationServerPublicKey = 'BNxP8Q3onty2qnLvk1yPU24UKNmfIluF3UxYR1UTAHu8Km61MnOr_RdaqOe8lYmcN6fo56cH1rpjVRzuLOSrpEs';
+const applicationServerPublicKey = 'BF0JHdT25cVc1RA38jPZHEQo_VJ-C7-ZrTHu1aS-eNiZL9IIW0n4NSHxeY_kNBv37ca9JZfc4YMp2Qb0NKidYig';
 
 function urlB64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
